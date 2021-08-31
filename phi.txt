@@ -1,0 +1,19 @@
+ll phi[size+2];
+void totient()
+{
+    
+    for(int i=1;i<=size;i++)
+    phi[i]=i;
+    for(int i=2;i<=size;i++)
+    {
+        if(phi[i]==i)
+        {
+            phi[i]=i-1;
+            for(int j=2*i;j<=size;j+=i)
+            {
+                phi[j]=(phi[j]/i)*(i-1);
+            }
+        }
+    }
+    
+}

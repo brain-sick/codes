@@ -1,0 +1,14 @@
+long long int exponent(long long int base,long long int power,long long int m)   
+{
+	long long int ans=1;
+	while(power>0)
+	{
+		if(power&1)
+			ans=(ans*base)%m;
+		
+		base=(base*base)%m;				
+		power/=2;				
+	}
+	
+	return ans;
+}

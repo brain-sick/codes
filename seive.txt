@@ -1,0 +1,20 @@
+#define size 1000000
+int primes[size+2];
+void seive()
+{
+    for(int i=1;i<=size;i++)
+    primes[i]=1;
+    primes[0]=0;
+    primes[1]=0;
+    for(ll i=2;i*i<=size;i++)
+    {
+        if(primes[i]==1)
+        {
+            for(int j=i*i;j<=size;j+=i)
+            {
+                primes[j]=0;
+            }
+        }
+    }
+    
+}

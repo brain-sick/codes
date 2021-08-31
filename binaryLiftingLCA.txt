@@ -1,0 +1,82 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define boost ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+#define mod 1000000007
+using namespace std;
+const int N = 200005;
+int D;
+int par[20][N];
+int depth[N];
+vector<int> adj[N];
+
+bool vis[N] ={false};
+int walk(int i,int k){
+    for(int d=0;d<=D && i!=0;d++){
+        if(k&(1<<d))
+            i = par[d][i];
+    }
+    return i;
+}
+int lca(int a,int b){
+    if(depth[a]>depth[b]){
+        a = walk(a,depth[a]-depth[b]);
+    }
+    if(depth[b]>depth[a]){
+        b = walk(b,depth[b]-depth[a]);
+    }
+    if(a==b) return a;
+    for(int d=D;d>=0;d--){
+        if(par[d][a]!=par[d][b]){
+            a = par[d][a];
+            b = par[d][b];
+        }
+    }
+    return par[0][a];
+}
+void dfs(int x){
+    if(vis[x]) return;
+    vis[x] = 1;
+    
+    for(auto y:adj[x]){
+        if(vis[y]) continue;
+        par[0][y] = x;
+        depth[y] = depth[x]+1;
+        dfs(y);
+    }
+
+}
+int main()
+{
+	 
+   boost
+   #ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	#endif
+	int t=1;
+// 	cin>>t;
+	while(t--)
+	{
+	    int n;
+	    cin>>n;
+	    D = ceil(log2(n));
+	    for(int i=0;i<n-1;i++){
+	        int u,v;
+	        cin>>u>>v;
+	        adj[u].push_back(v);
+	        adj[v].push_back(u);
+	    }
+	    
+	    dfs(1);
+	    
+	    for(int k=1;k<=D;k++){
+            for(int i=1;i<=n;i++){
+                int m = par[k-1][i];
+                if(m!=0)
+                    par[k][i] = par[k-1][m];
+            }
+        }
+        
+	}
+    return 0;
+}
