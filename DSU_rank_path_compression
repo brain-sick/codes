@@ -1,6 +1,7 @@
 struct DSU{
 	vector<int> rnk;
 	vector<int> parent;
+	/*!! our dsu is 0 indexed , make sure problem statement is converted zero indexed!! */
 	void init(int n){
 		rnk.assign(n,0);
 		parent.assign(n,0);
