@@ -1,0 +1,24 @@
+struct DSU{
+	vector<int> rnk;
+	vector<int> parent;
+	void init(int n){
+		rnk.assign(n,0);
+		parent.assign(n,0);
+		for(int i=0;i<n;i++)
+			parent[i] = i;
+	}
+
+	int find(int x){
+		if(parent[x] == x) return x;
+		return parent[x] = find(parent[x]);
+	}
+	void unite(int u, int v){
+		u = find(u);
+		v = find(v);
+		if(rnk[u]<rnk[v])
+			swap(u,v);
+		parent[v] = u;
+		if(rnk[u] == rnk[v])
+			rnk[u]++;
+	}
+};
