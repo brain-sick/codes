@@ -16,6 +16,7 @@ struct DSU{
 	void unite(int u, int v){
 		u = find(u);
 		v = find(v);
+		if(u == v) return;
 		if(rnk[u]<rnk[v])
 			swap(u,v);
 		parent[v] = u;
