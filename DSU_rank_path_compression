@@ -9,15 +9,18 @@ struct DSU{
 			parent[i] = i;
 	}
 
-	int find(int x){
+	int find(int x, bool ENALBE_PATH_COMPR = true){
 		if(parent[x] == x) return x;
-		return parent[x] = find(parent[x]);
+		if(ENALBE_PATH_COMPR)
+			return parent[x] = find(parent[x]);
+		else 
+			return find(parent[x]);
 	}
-	void unite(int u, int v){
+	void unite(int u, int v, bool ENABLE_UNION_BY_RANK = true){
 		u = find(u);
 		v = find(v);
 		if(u == v) return;
-		if(rnk[u]<rnk[v])
+		if(ENABLE_UNION_BY_RANK && rnk[u]<rnk[v])
 			swap(u,v);
 		parent[v] = u;
 		if(rnk[u] == rnk[v])
